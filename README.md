@@ -508,3 +508,64 @@ time complexity not worse than `O(numbers.length x pattern.length)` will fit wit
   Let's check all possible subarrays of length `3`. Note, that the subarray `[4, 1, 3]`, starting with `numbers[0] = 4` does not need to be checked, as there is
   nothing to compare the first element with.
   - Subarray `[1, 3, 4]` doesn't satisfy the pattern. pattern[0] = 1 means ther the first element of the subarray should be greater than the
+
+#### Solution
+```python
+def solution(numbers, pattern):
+    count = 0
+    n = len(numbers)
+    m = len(pattern)
+    
+    # 遍历每一个子数组
+    for i in range(n - m):
+        match = True
+        
+        # 检查子数组是否符合pattern
+        for j in range(m):
+            if pattern[j] == 1 and numbers[i + j + 1] <= numbers[i + j]:
+                match = False
+                break
+            if pattern[j] == 0 and numbers[i + j + 1] != numbers[i + j]:
+                match = False
+                break
+            if pattern[j] == -1 and numbers[i + j + 1] >= numbers[i + j]:
+                match = False
+                break
+        
+        # 如果符合条件，计数加1
+        if match:
+            count += 1
+    
+    return count
+
+numbers = [4, 1, 3, 4, 4, 5, 5, 1]
+pattern = [1, 0, -1]
+
+print(solution(numbers, pattern))
+```
+
+### Question 10
+Imagine you are playing a gravity-based puzzle game that involves clearing obstacles to allow an irregularly-shaped figure to fall to the bottom.
+
+You are given a rectangular matrix `board` representing the game board, which only contains the following types of cells:
+
+- `'-'` represents an empty cell
+- `'#'` represents an obstacle
+- `'*'` represents part of the figure
+
+It is guaranteed that the figure consists of one piece, where all parts are connected by the sides.
+
+Your task is to simulate how the figure should fall, and find the minimum number of obstacles that should be removed to let the figure finally touch the bottom of the board with at least one of its cells.
+
+Note: You are not expected to provide the most optimal solution, but a solution with time complexity not worse than `O(board.length * board[0].length)` will fit within the execution time limit.
+
+#### Example
+- For
+  ```
+  board = [['*', '*', '*'],
+           ['#', '*', '*'],
+           ['-', '-', '-'],
+           ['-', '#', '#']]
+  
+  ```
+  the output should be `solution(board) = 2`.
