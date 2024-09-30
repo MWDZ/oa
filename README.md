@@ -564,6 +564,7 @@ Note: You are not expected to provide the most optimal solution, but a solution 
   ```
   board = [['*', '*', '*'],
            ['#', '*', '*'],
+           ['*', '*', '-'],
            ['-', '-', '-'],
            ['-', '#', '#']]
   
